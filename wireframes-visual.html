@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Cosmiatra — Wireframes visuales</title>
+<style>
+  :root{
+    --coffee:#432818;      /* Dark Coffee */
+    --chocolate:#99582a;   /* Chocolate Brown */
+    --camel:#bb9457;       /* Camel */
+    --apricot:#ffe6a7;     /* Light Apricot */
+    --cream:#FDF6E7;
+    --butter:#ffe6a7;
+    --butter-soft:#FFF3D0;
+    --blush:#bb9457;
+    --brown:#99582a;
+    --brown-dark:#432818;
+    --accent:#99582a;
+    --accent-dark:#7A4521;
+    --text:#432818;
+    --muted:#A1805A;
+    --line:#EAD8B3;
+    --white:#FFFFFF;
+    --ok:#7C9A6D;
+    --warn:#D98E4A;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    background:#F1E9DC;
+    color:var(--text);
+    padding-bottom:80px;
+  }
+  header{
+    position:sticky; top:0; z-index:50;
+    background:linear-gradient(135deg,var(--coffee),var(--chocolate));
+    color:#fff;
+    padding:14px 20px;
+    box-shadow:0 2px 10px rgba(79,62,51,.25);
+  }
+  header h1{ margin:0; font-size:18px; font-weight:600; letter-spacing:.3px }
+  header p{ margin:4px 0 0; font-size:12px; opacity:.9 }
+  nav{
+    position:sticky; top:64px; z-index:49;
+    background:var(--butter-soft);
+    border-bottom:1px solid var(--line);
+    padding:8px 14px;
+    display:flex; gap:8px; overflow-x:auto; white-space:nowrap;
+  }
+  nav a{
+    text-decoration:none; color:var(--brown-dark);
+    background:#fff; border:1px solid var(--line);
+    padding:5px 11px; border-radius:999px; font-size:12px;
+  }
+  nav a:hover{ background:var(--blush) }
+  main{ max-width:1260px; margin:0 auto; padding:24px 18px }
+  .section-head{
+    margin:34px 0 14px; font-size:13px; text-transform:uppercase;
+    letter-spacing:1px; color:var(--muted); font-weight:700;
+  }
+  .grid{ display:flex; flex-wrap:wrap; gap:22px; align-items:flex-start }
+  .frame{
+    width:340px; background:var(--cream);
+    border:1px solid var(--line); border-radius:26px;
+    box-shadow:0 10px 30px rgba(79,62,51,.14);
+    overflow:hidden;
+  }
+  .frame .screen-label{
+    background:#fff; border-bottom:1px solid var(--line);
+    padding:9px 14px; font-size:12px; font-weight:700; color:var(--muted);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .frame .screen-label .dot{ width:8px; height:8px; border-radius:50%; background:var(--warn); }
+  .screen{ padding:16px; }
+  /* shared UI atoms */
+  .bar{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:14px }
+  .logo{ font-weight:800; font-size:15px; color:var(--brown); display:flex; align-items:center; gap:6px }
+  .logo .flower{ width:20px;height:20px;border-radius:50%;background:var(--blush);display:inline-block }
+  .btn{ border:none; cursor:pointer; font-size:13px; padding:10px 14px; border-radius:12px; font-weight:600 }
+  .btn-primary{ background:var(--accent); color:#fff }
+  .btn-primary:hover{ background:var(--accent-dark) }
+  .btn-ghost{ background:transparent; color:var(--accent); border:1.5px solid var(--accent) }
+  .btn-soft{ background:var(--butter-soft); color:var(--brown-dark); border:1px solid var(--line) }
+  .btn-block{ width:100%; margin-top:12px }
+  .h{ font-size:16px; font-weight:800; color:var(--brown-dark); margin:2px 0 6px }
+  .sub{ font-size:12px; color:var(--muted); margin:0 0 14px }
+  .input{ width:100%; border:1px solid var(--line); background:#fff; border-radius:10px; padding:9px 11px; font-size:13px; color:var(--text) }
+  .label{ font-size:11px; color:var(--muted); font-weight:700; margin:10px 0 4px; display:block }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px; margin-bottom:10px }
+  .chip{ display:inline-block; background:var(--butter); border-radius:999px; padding:4px 10px; font-size:11px; margin:2px 3px 2px 0; color:var(--brown-dark) }
+  .row{ display:flex; justify-content:space-between; align-items:center }
+  .tag{ font-size:10px; font-weight:700; padding:3px 8px; border-radius:999px }
+  .tag-active{ background:#E4EEDB; color:#5C7A4E }
+  .tag-low{ background:#FBE7D1; color:#B26A1F }
+  .opt{ display:flex; align-items:center; gap:8px; padding:7px 2px; font-size:13px; border-bottom:1px dashed var(--line) }
+  .radio{ width:14px;height:14px;border-radius:50%;border:2px solid var(--brown); }
+  .radio.on{ background:var(--accent); border-color:var(--accent); box-shadow:inset 0 0 0 3px #fff }
+  .check{ width:15px;height:15px;border-radius:4px;border:2px solid var(--brown) }
+  .check.on{ background:var(--accent); border-color:var(--accent) }
+  .avatar{ width:34px;height:34px;border-radius:50%;background:var(--blush);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px }
+  .muted{ color:var(--muted); font-size:12px }
+  .small{ font-size:11px }
+  table{ width:100%; border-collapse:collapse; font-size:11px }
+  th{ text-align:left; color:var(--muted); font-weight:700; padding:6px 4px; border-bottom:1px solid var(--line) }
+  td{ padding:6px 4px; border-bottom:1px solid var(--line) }
+  .stat{ flex:1; background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; text-align:center }
+  .stat b{ font-size:18px; color:var(--accent-dark); display:block }
+  .stat span{ font-size:10px; color:var(--muted) }
+  .hero{ background:linear-gradient(160deg, var(--butter), var(--blush)); border-radius:16px; padding:22px 16px; text-align:center; margin-bottom:14px }
+  .hero h2{ margin:0 0 6px; font-size:19px; color:var(--brown-dark) }
+  .hero p{ margin:0 0 12px; font-size:12px; color:var(--brown-dark); opacity:.85 }
+  .img-ph{ background:#EDE1C8; border-radius:12px; color:#A68A5E; font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .divider{ border:none; border-top:1px solid var(--line); margin:14px 0 }
+  .note-box{ background:var(--butter-soft); border:1px dashed var(--line); border-radius:10px; padding:8px 10px; font-size:11px; color:var(--muted) }
+  .timeline{ border-left:2px solid var(--line); margin-left:8px; padding-left:12px }
+  .titem{ margin-bottom:10px; font-size:12px }
+  .titem b{ color:var(--accent-dark) }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌸 La Cosmiatra — Wireframes visuales</h1>
+  <p>Maqueta de baja fidelidad · paleta: camel #bb9457 · albaricoque #ffe6a7 · chocolate #99582a · café #432818 · contenido en español · v0.1</p>
+</header>
+
+<nav>
+  <a href="#inicio">Inicio</a>
+  <a href="#reserva">Reservar cita</a>
+  <a href="#miscitas">Mis citas</a>
+  <a href="#panel">Panel</a>
+  <a href="#detalle">Detalle de cita</a>
+  <a href="#inventario">Inventario</a>
+  <a href="#servicios">Servicios</a>
+  <a href="#clientes">Clientes</a>
+  <a href="#ingresos">Ingresos</a>
+  <a href="#ajustes">Ajustes</a>
+</nav>
+
+<main>
+
+<!-- ===================== INICIO ===================== -->
+<div class="section-head" id="inicio">1 · Inicio (público) — sin precios</div>
+<div class="grid">
+  <div class="frame">
+    <div class="screen-label"><span>La Cosmiatra</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar">
+        <div class="logo"><span class="flower"></span>La Cosmiatra</div>
+        <div class="small" style="color:var(--muted)">Inicio · Servicios · <b style="color:var(--accent)">Reservar</b></div>
+      </div>
+      <div class="hero">
+        <h2>Cuidá tu piel con un tratamiento personalizado</h2>
+        <p>Resultados seguros y efectivos desde tu primera sesión.</p>
+        <button class="btn btn-primary">Reservar cita</button>
+      </div>
+      <div class="sub" style="font-weight:800;color:var(--brown-dark)">Sobre mí</div>
+      <div class="row" style="gap:12px">
+        <div class="img-ph" style="width:74px;height:74px;flex:none">foto</div>
+        <div class="small">Hola, soy [nombre]. Esteticista especializada en cuidado facial, manchas y acné…</div>
+      </div>
+      <hr class="divider">
+      <div class="sub" style="font-weight:800;color:var(--brown-dark)">Servicios</div>
+      <div class="row" style="gap:10px">
+        <div class="card" style="flex:1;margin:0"><b style="font-size:13px">Limpieza facial</b><div class="muted">60 min</div></div>
+        <div class="card" style="flex:1;margin:0"><b style="font-size:13px">Facial anti-acné</b><div class="muted">45 min</div></div>
+      </div>
+      <button class="btn btn-soft btn-block">Ver todos los servicios</button>
+      <hr class="divider">
+      <div class="small muted">📍 Dirección · 🕒 Lun–Sáb 9:00–18:00<br>📞 Teléfono · ✉ correo</div>
+      <div class="small muted" style="margin-top:10px;text-align:center">© La Cosmiatra · Instagram · WhatsApp</div>
+    </div>
+  </div>
+  <div class="note-box" style="width:340px;align-self:flex-start;margin-top:40px">
+    <b>Nota:</b> Los precios <b>no</b> aparecen en la página pública. El botón «Reservar cita» abre el flujo de reserva.
+  </div>
+</div>
+
+<!-- ===================== RESERVA ===================== -->
+<div class="section-head" id="reserva">2 · Reservar cita (5 pasos)</div>
+<div class="grid">
+  <div class="frame">
+    <div class="screen-label"><span>Paso 1 · Servicio</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="small muted">‹ Reservar cita · <b>Paso 1 de 4</b></div>
+      <div class="h">¿Qué servicio deseas?</div>
+      <div class="opt"><span class="radio on"></span> Limpieza facial <span class="muted" style="margin-left:auto">60 min</span></div>
+      <div class="opt"><span class="radio"></span> Facial anti-acné <span class="muted" style="margin-left:auto">45 min</span></div>
+      <div class="opt"><span class="radio"></span> Dermaplaning <span class="muted" style="margin-left:auto">30 min</span></div>
+      <div class="opt"><span class="radio"></span> Tratamiento de manchas <span class="muted" style="margin-left:auto">60 min</span></div>
+      <button class="btn btn-primary btn-block">Continuar</button>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="screen-label"><span>Paso 2 · Fecha y hora</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="small muted">‹ Reservar cita · <b>Paso 2 de 4</b></div>
+      <div class="h">Elige la fecha y la hora</div>
+      <div class="img-ph" style="height:120px;margin-bottom:12px">calendario (mes)</div>
+      <div class="label">Horarios disponibles</div>
+      <div><span class="chip">9:00</span><span class="chip">10:00</span><span class="chip" style="opacity:.35">10:30</span><span class="chip">11:30</span><span class="chip">14:00</span><span class="chip">16:00</span></div>
+      <div class="note-box" style="margin-top:10px">Los horarios ocupados aparecen deshabilitados.</div>
+      <button class="btn btn-primary btn-block">Continuar</button>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="screen-label"><span>Paso 3 · Identificación</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="small muted">‹ Reservar cita · <b>Paso 3 de 4</b></div>
+      <div class="h">¿Cuál es tu correo electrónico?</div>
+      <input class="input" placeholder="tucorreo@ejemplo.com">
+      <div class="small muted" style="margin:8px 0">Te enviaremos un código de acceso.</div>
+      <button class="btn btn-primary btn-block">Continuar</button>
+      <hr class="divider">
+      <div class="h">Verifica tu correo</div>
+      <div class="row" style="justify-content:center;gap:8px;margin:10px 0">
+        <span class="input" style="width:34px;text-align:center">·</span>
+        <span class="input" style="width:34px;text-align:center">·</span>
+        <span class="input" style="width:34px;text-align:center">·</span>
+        <span class="input" style="width:34px;text-align:center">·</span>
+        <span class="input" style="width:34px;text-align:center">·</span>
+        <span class="input" style="width:34px;text-align:center">·</span>
+      </div>
+      <button class="btn btn-primary btn-block">Verificar</button>
+      <div class="small muted" style="text-align:center;margin-top:8px">Reenviar código</div>
+      <div class="note-box" style="margin-top:10px">Correo nuevo → crea cuenta y va al Paso 4. Correo existente → inicia sesión y salta al Paso 5.</div>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="screen-label"><span>Paso 4 · Ficha Clínica (nuevos)</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="small muted">‹ Reservar cita · <b>Paso 4 de 4</b></div>
+      <div class="h">Cuéntanos de ti</div>
+      <label class="label">Correo electrónico *</label><input class="input">
+      <label class="label">Nombre completo</label><input class="input">
+      <div class="row" style="gap:10px">
+        <div style="flex:1"><label class="label">Edad</label><input class="input"></div>
+        <div style="flex:1"><label class="label">Sexo</label>
+          <div class="row" style="gap:6px;margin-top:6px"><span class="radio on"></span>Hombre <span class="radio"></span>Mujer</div>
+        </div>
+      </div>
+      <label class="label">Ocupación</label><input class="input">
+      <label class="label">Teléfono celular</label><input class="input">
+      <label class="label">Motivo de visita</label>
+      <div><span class="chip">Acné</span><span class="chip">Rosácea</span><span class="chip">Manchas</span><span class="chip">Arrugas</span><span class="chip">Blanqueamiento corporal</span><span class="chip">Mantenimiento</span><span class="chip">Otros</span></div>
+      <label class="label">Datos clínicos</label>
+      <div class="opt"><span class="radio"></span>¿Ha estado en algún tratamiento dermatológico anteriormente?</div>
+      <div class="opt"><span class="radio"></span>¿Tienes algún tratamiento dermatológico en curso?</div>
+      <div class="small muted" style="margin:6px 0">… (resto del cuestionario)</div>
+      <div class="opt"><span class="check"></span> Acepto el consentimiento informado</div>
+      <button class="btn btn-primary btn-block">Continuar</button>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="screen-label"><span>Paso 5 · Confirmación</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="small muted">‹ Reservar cita · <b>Confirmación</b></div>
+      <div class="h">Revisa tu cita</div>
+      <div class="card">
+        <div class="row"><span class="muted">Servicio</span><b>Limpieza facial</b></div>
+        <div class="row"><span class="muted">Fecha</span><b>martes 10 nov 2026</b></div>
+        <div class="row"><span class="muted">Hora</span><b>9:00 – 10:00</b></div>
+        <div class="row"><span class="muted">Cliente</span><b>María G.</b></div>
+      </div>
+      <button class="btn btn-primary btn-block">Confirmar cita</button>
+      <button class="btn btn-ghost btn-block">Cancelar</button>
+      <hr class="divider">
+      <div class="card" style="background:var(--butter-soft);text-align:center">
+        <div style="font-size:22px">✓</div>
+        <b>¡Cita confirmada!</b>
+        <div class="muted">Te enviamos la confirmación a tu correo.</div>
+      </div>
+      <button class="btn btn-soft btn-block">Volver al inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MIS CITAS ===================== -->
+<div class="section-head" id="miscitas">3 · Mis citas (cliente)</div>
+<div class="grid">
+  <div class="frame">
+    <div class="screen-label"><span>Mis citas</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar"><div class="h" style="margin:0">Mis citas</div><div class="small" style="color:var(--accent)">Mi perfil</div></div>
+      <div class="label">Próximas</div>
+      <div class="card">
+        <b>Limpieza facial</b>
+        <div class="muted">mar 10 nov · 9:00 (60 min)</div>
+        <div class="row" style="margin-top:8px">
+          <button class="btn btn-ghost small" style="padding:6px 10px">Reprogramar</button>
+          <button class="btn btn-soft small" style="padding:6px 10px">Cancelar</button>
+        </div>
+      </div>
+      <div class="label">Pasadas</div>
+      <div class="card">
+        <b>Facial anti-acné</b>
+        <div class="muted">20 oct</div>
+        <div class="row" style="margin-top:8px"><button class="btn btn-soft small" style="padding:6px 10px">Reservar de nuevo</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PANEL ===================== -->
+<div class="section-head" id="panel">4 · Panel (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:520px">
+    <div class="screen-label"><span>Panel</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar">
+        <div class="logo"><span class="flower"></span>La Cosmiatra · Panel</div>
+        <div class="row" style="gap:8px"><span class="avatar">E</span><span class="small muted">Salir</span></div>
+      </div>
+      <div class="row" style="gap:12px;align-items:stretch">
+        <div class="card" style="width:120px;margin:0">
+          <div class="small" style="font-weight:700;color:var(--muted);margin-bottom:8px">Menú</div>
+          <div class="small" style="padding:4px 0"><b style="color:var(--accent-dark)">● Panel</b></div>
+          <div class="small" style="padding:4px 0">Citas</div>
+          <div class="small" style="padding:4px 0">Clientes</div>
+          <div class="small" style="padding:4px 0">Servicios</div>
+          <div class="small" style="padding:4px 0">Inventario</div>
+          <div class="small" style="padding:4px 0">Reportes</div>
+          <div class="small" style="padding:4px 0">Ajustes</div>
+        </div>
+        <div style="flex:1">
+          <div class="label">Citas de hoy</div>
+          <div class="card">
+            <div class="row"><div><b>9:00</b> María G.</div><span class="muted small">Limpieza facial</span></div>
+            <div class="row"><div><b>10:30</b> Ana R.</div><span class="muted small">Facial anti-acné</span></div>
+            <div class="row"><div><b>14:00</b> —</div><span class="muted small">—</span></div>
+          </div>
+          <div class="row" style="gap:8px;margin-top:10px">
+            <div class="stat"><b>3</b><span>Citas hoy</span></div>
+            <div class="stat"><b>45</b><span>Clientes</span></div>
+            <div class="stat"><b>RD$</b><span>Ingresos mes</span></div>
+            <div class="stat"><b style="color:var(--warn)">2</b><span>Stock bajo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DETALLE DE CITA ===================== -->
+<div class="section-head" id="detalle">5 · Detalle de cita (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:480px">
+    <div class="screen-label"><span>Detalle de cita</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar"><div class="small muted">‹ Volver a Citas</div><div class="small">···</div></div>
+      <div class="card">
+        <div class="row"><b>María García</b><span class="tag tag-active">Confirmada</span></div>
+        <div class="muted">+1 809 … · maria@mail.com</div>
+        <hr class="divider">
+        <div class="row"><span class="muted">Servicio</span><b>Limpieza facial (60 min)</b></div>
+        <div class="row"><span class="muted">Fecha</span><b>mar 10 nov · 9:00 – 10:00</b></div>
+      </div>
+      <div class="label">Notas de tratamiento</div>
+      <button class="btn btn-soft small" style="padding:6px 10px">+ Agregar nota</button>
+      <div class="timeline" style="margin-top:10px">
+        <div class="titem"><b>10:05 · esteticista</b><br>Se aplicó limpieza profunda y mascarilla.</div>
+        <div class="titem"><b>09:55 · esteticista</b><br>Piel sensible en mejillas; evitar exfoliación fuerte.</div>
+      </div>
+      <div class="label">Productos vendidos</div>
+      <button class="btn btn-soft small" style="padding:6px 10px">+ Agregar producto</button>
+      <div class="card" style="margin-top:8px">
+        <div class="row"><span>Sérum hidratante × 1</span><b>RD$ 1,500</b></div>
+        <div class="row"><span>Protector solar × 2</span><b>RD$ 1,800</b></div>
+      </div>
+      <div class="row" style="gap:8px;margin-top:12px">
+        <button class="btn btn-primary" style="flex:1">Marcar como completada</button>
+        <button class="btn btn-soft" style="flex:1">Cancelar</button>
+        <button class="btn btn-soft" style="flex:1">No se presentó</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== INVENTARIO ===================== -->
+<div class="section-head" id="inventario">6 · Inventario (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:560px">
+    <div class="screen-label"><span>Inventario</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar"><div class="h" style="margin:0">Inventario</div><button class="btn btn-primary small" style="padding:7px 12px">+ Agregar producto</button></div>
+      <input class="input" placeholder="Buscar…">
+      <table style="margin-top:12px">
+        <tr><th>Producto</th><th>Costo</th><th>Venta</th><th>Ganancia</th><th>Cant.</th></tr>
+        <tr><td>Sérum hidratante</td><td>800</td><td>1,500</td><td>700</td><td>12</td></tr>
+        <tr><td>Protector solar SPF</td><td>500</td><td>900</td><td>400</td><td><span class="tag tag-low">2 ⚠</span></td></tr>
+        <tr><td>Crema anti-manchas</td><td>600</td><td>1,200</td><td>600</td><td>8</td></tr>
+      </table>
+      <div class="note-box" style="margin-top:10px">⚠ = stock bajo (cantidad ≤ umbral).</div>
+    </div>
+  </div>
+  <div class="frame">
+    <div class="screen-label"><span>Ficha de producto</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="h">Editar producto</div>
+      <label class="label">Nombre</label><input class="input" value="Sérum hidratante">
+      <label class="label">Costo</label><input class="input" value="800">
+      <label class="label">Precio venta</label><input class="input" value="1,500">
+      <div class="note-box" style="margin:8px 0">Ganancia (auto): <b>RD$ 700</b></div>
+      <label class="label">Cantidad</label><input class="input" value="12">
+      <div class="label">Movimientos</div>
+      <div class="small muted">+10 entrada · 05 nov<br>−2 venta · 09 nov<br>−1 ajuste · 10 nov</div>
+      <button class="btn btn-primary btn-block">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SERVICIOS ===================== -->
+<div class="section-head" id="servicios">7 · Servicios (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:560px">
+    <div class="screen-label"><span>Servicios</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar"><div class="h" style="margin:0">Servicios</div><button class="btn btn-primary small" style="padding:7px 12px">+ Agregar servicio</button></div>
+      <table>
+        <tr><th>Servicio</th><th>Duración</th><th>Precio interno</th><th>Estado</th></tr>
+        <tr><td>Limpieza facial</td><td>60 min</td><td>RD$ 2,000</td><td><span class="tag tag-active">Activo</span></td></tr>
+        <tr><td>Facial anti-acné</td><td>45 min</td><td>RD$ 2,500</td><td><span class="tag tag-active">Activo</span></td></tr>
+        <tr><td>Dermaplaning</td><td>30 min</td><td>RD$ 1,800</td><td><span class="tag" style="background:#eee">Inactivo</span></td></tr>
+      </table>
+      <div class="note-box" style="margin-top:10px">El precio es <b>interno</b>; no aparece en la página pública.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CLIENTES ===================== -->
+<div class="section-head" id="clientes">8 · Clientes (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:520px">
+    <div class="screen-label"><span>Clientes</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar"><div class="h" style="margin:0">Clientes</div><input class="input" style="width:150px" placeholder="Buscar…"></div>
+      <table>
+        <tr><th>Nombre</th><th>Teléfono</th><th>Última cita</th></tr>
+        <tr><td>María García</td><td>+1 809 …</td><td>10 nov</td></tr>
+        <tr><td>Ana Rodríguez</td><td>+1 809 …</td><td>20 oct</td></tr>
+        <tr><td>Laura Pérez</td><td>+1 829 …</td><td>—</td></tr>
+      </table>
+      <div class="label" style="margin-top:12px">Detalle del cliente</div>
+      <div class="card">
+        <div class="row"><div><b>María García</b><div class="muted">+1 809 … · maria@mail.com</div></div><span class="avatar">M</span></div>
+        <div class="small muted" style="margin-top:8px">Ficha Clínica completa (editable) · Historial de citas y notas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== INGRESOS ===================== -->
+<div class="section-head" id="ingresos">9 · Ingresos / reportes (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:520px">
+    <div class="screen-label"><span>Reportes</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="bar"><div class="h" style="margin:0">Reportes</div><div class="small muted">Del: 01 nov · Al: 30 nov</div></div>
+      <div class="row" style="gap:8px">
+        <div class="stat"><b>RD$ 12,500</b><span>Ingresos por servicios</span></div>
+        <div class="stat"><b>RD$ 4,800</b><span>Ganancia por productos</span></div>
+        <div class="stat"><b>RD$ 17,300</b><span>Total</span></div>
+      </div>
+      <div class="img-ph" style="height:110px;margin-top:12px">gráfico de ingresos (mes/semana)</div>
+      <div class="label">Ventas por cita</div>
+      <table>
+        <tr><th>Cita</th><th>Servicio</th><th>Producto</th><th>Total</th></tr>
+        <tr><td>10 nov</td><td>Limpieza</td><td>Sérum ×1</td><td>3,500</td></tr>
+        <tr><td>09 nov</td><td>Anti-acné</td><td>—</td><td>2,500</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== AJUSTES ===================== -->
+<div class="section-head" id="ajustes">10 · Ajustes (admin)</div>
+<div class="grid">
+  <div class="frame" style="width:420px">
+    <div class="screen-label"><span>Ajustes</span><span class="dot"></span></div>
+    <div class="screen">
+      <div class="h">Ajustes</div>
+      <div class="label">Horario</div>
+      <div class="small muted">Lun–Vie 9:00–18:00 · Sáb 9:00–14:00 · Dom cerrado</div>
+      <div class="opt"><span class="check on"></span> Lun <span class="muted" style="margin-left:auto">9:00–18:00</span></div>
+      <div class="opt"><span class="check on"></span> Mar <span class="muted" style="margin-left:auto">9:00–18:00</span></div>
+      <div class="opt"><span class="check on"></span> Sáb <span class="muted" style="margin-left:auto">9:00–14:00</span></div>
+      <div class="opt"><span class="check"></span> Dom <span class="muted" style="margin-left:auto">Cerrado</span></div>
+      <label class="label">Búfer entre citas</label>
+      <input class="input" value="10 min">
+      <button class="btn btn-primary btn-block">Guardar horario</button>
+      <hr class="divider">
+      <div class="label">Google Calendar</div>
+      <div class="card"><span class="tag tag-active">● Conectado</span><span class="small"> esteticista@gmail.com</span>
+        <div class="small muted" style="margin-top:6px"><u>Reconectar</u></div></div>
+      <div class="label">Negocio</div>
+      <div class="row"><span class="muted">Nombre</span><b>La Cosmiatra</b></div>
+      <div class="row"><span class="muted">Moneda</span><b>DOP</b></div>
+      <div class="row"><span class="muted">Cancelación</span><b>24 h antes</b></div>
+      <div class="label">Notificaciones</div>
+      <div class="opt"><span class="check on"></span> Confirmación por correo</div>
+      <div class="opt"><span class="check on"></span> Recordatorio 24 h</div>
+    </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

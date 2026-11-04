@@ -1,0 +1,83 @@
+/* Shared month calendar */
+.cal {
+  background: #fff;
+  border: 1px solid var(--line, #e6d6bb);
+  border-radius: 16px;
+  padding: 14px;
+  max-width: 380px;
+}
+.cal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cal__nav {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line, #e6d6bb);
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ink, #2b1d14);
+}
+.cal__nav:hover {
+  background: var(--sand, #f4e9d8);
+}
+.cal__label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink, #2b1d14);
+  text-transform: capitalize;
+}
+.cal__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.cal__weekdays span {
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted, #8a7358);
+  padding: 4px 0;
+}
+.cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.cal__day {
+  aspect-ratio: 1;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink, #2b1d14);
+  cursor: pointer;
+}
+.cal__day:hover:not(:disabled) {
+  background: var(--sand, #f4e9d8);
+}
+.cal__day:disabled {
+  color: #cfc3ae;
+  cursor: default;
+}
+.cal__day--out {
+  color: #e0d4c0;
+}
+.cal__day.is-marked {
+  background: rgba(217, 142, 74, 0.16);
+  color: #a5621f;
+  font-weight: 700;
+}
+.cal__day.is-selected {
+  background: var(--chocolate, #99582a);
+  color: #fff;
+  font-weight: 700;
+}

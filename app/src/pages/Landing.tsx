@@ -179,8 +179,7 @@ export default function Landing() {
             <span className="l-eyebrow">Servicios</span>
             <h2 className="l-heading">Tratamientos pensados para tu piel</h2>
             <p className="l-section__intro">
-              Cada servicio se adapta a las necesidades de tu piel. Los precios se comparten en
-              la consulta.
+              Cada servicio se adapta a las necesidades de tu piel.
             </p>
 
             {loading && services.length === 0 && (

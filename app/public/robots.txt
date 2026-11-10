@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /panel
+Disallow: /login
+Disallow: /mis-citas
+
+Sitemap: https://la-cosmiatra.pages.dev/sitemap.xml

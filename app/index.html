@@ -6,8 +6,32 @@
     <meta name="theme-color" content="#99582a" />
     <meta
       name="description"
-      content="La Cosmiatra — belleza y bienestar. Cuidado facial personalizado y reserva de citas."
+      content="La Cosmiatra — belleza y bienestar. Cuidado facial personalizado, limpieza facial, facial anti-acné, dermaplaning y tratamiento de manchas en Santo Domingo. Reserva tu cita en línea."
     />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://la-cosmiatra.pages.dev/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="La Cosmiatra" />
+    <meta property="og:title" content="La Cosmiatra · Belleza y Bienestar" />
+    <meta
+      property="og:description"
+      content="Cuidado facial personalizado en Santo Domingo. Reserva tu cita en línea."
+    />
+    <meta property="og:url" content="https://la-cosmiatra.pages.dev/" />
+    <meta property="og:image" content="https://la-cosmiatra.pages.dev/photo-1.jpg" />
+    <meta property="og:locale" content="es_DO" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="La Cosmiatra · Belleza y Bienestar" />
+    <meta
+      name="twitter:description"
+      content="Cuidado facial personalizado en Santo Domingo. Reserva tu cita en línea."
+    />
+    <meta name="twitter:image" content="https://la-cosmiatra.pages.dev/photo-1.jpg" />
+
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -21,9 +45,96 @@
       rel="stylesheet"
     />
     <title>La Cosmiatra · Belleza y Bienestar</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HealthAndBeautyBusiness",
+        "name": "La Cosmiatra",
+        "description": "Cuidado facial personalizado y reserva de citas en Santo Domingo, República Dominicana.",
+        "url": "https://la-cosmiatra.pages.dev/",
+        "image": "https://la-cosmiatra.pages.dev/photo-1.jpg",
+        "logo": "https://la-cosmiatra.pages.dev/logo.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        },
+        "areaServed": "Santo Domingo, República Dominicana",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "14:00"
+          }
+        ],
+        "priceRange": "$$"
+      }
+    </script>
+
+    <style>
+      .seo-fallback {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 56px 22px;
+        font-family: Inter, system-ui, sans-serif;
+        color: #432818;
+        line-height: 1.6;
+        background: #fbf6ee;
+        min-height: 100vh;
+      }
+      .seo-fallback h1 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 400;
+        font-size: 2.4rem;
+        margin: 0 0 12px;
+      }
+      .seo-fallback h2 {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-weight: 500;
+        font-size: 1.5rem;
+        margin: 28px 0 8px;
+        color: #99582a;
+      }
+      .seo-fallback ul {
+        padding-left: 20px;
+      }
+      .seo-fallback a {
+        color: #99582a;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="seo-fallback">
+        <h1>La Cosmiatra — Belleza y Bienestar</h1>
+        <p>
+          Cuidado facial personalizado en Santo Domingo. Tratamientos profesionales para tu piel,
+          con atención personalizada y reserva de citas en línea.
+        </p>
+        <h2>Servicios</h2>
+        <ul>
+          <li>Limpieza facial</li>
+          <li>Facial anti-acné</li>
+          <li>Dermaplaning</li>
+          <li>Tratamiento de manchas</li>
+        </ul>
+        <h2>Reserva tu cita</h2>
+        <p>Agenda en línea en minutos: <a href="/reservar">reservar cita</a>.</p>
+        <h2>Horario</h2>
+        <p>
+          Lunes a viernes de 9:00 a 18:00 · Sábados de 9:00 a 14:00 · Santo Domingo, República
+          Dominicana
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

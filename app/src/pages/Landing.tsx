@@ -159,17 +159,11 @@ export default function Landing() {
             <div className="l-about__body">
               <span className="l-eyebrow">Sobre mí</span>
               <h2 className="l-heading">Detrás de La Cosmiatra</h2>
-              <p className="l-quote">
-                Cada piel tiene una historia. Mi trabajo es escucharla y tratarla con el
-                cuidado que necesita.
-              </p>
+              <p className="l-quote">Soy cosmiatra y esteticista certificada.</p>
               <p>
-                Soy esteticista y creé La Cosmiatra con una idea simple: que cada visita sea un
-                espacio de calma y un paso real hacia la piel que quieres.
-              </p>
-              <p>
-                Trabajo con protocolos profesionales, productos de calidad y una atención
-                cercana, sin tratamientos genéricos.
+                Me especializo en el manejo del acné de forma integral y en la hiperpigmentación en
+                sus diversas presentaciones. Protocolos personalizados con técnicas de microneedling
+                para mejorar afecciones.
               </p>
               <div className="l-signature">
                 La Cosmiatra
@@ -287,7 +281,7 @@ export default function Landing() {
           <div>
             <h3 className="l-footer__title">Contacto</h3>
             <ul className="l-footer__list">
-              <li>Santo Domingo, República Dominicana</li>
+              <li>Santiago de los Caballeros, República Dominicana</li>
               <li>Lun–Sáb · 9:00–18:00</li>
               <li><a href="mailto:leonelanunez@lacosmiatra.com">leonelanunez@lacosmiatra.com</a></li>
               <li><a href="/reservar">Reservar cita</a></li>

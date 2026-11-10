@@ -4,4 +4,4 @@ Disallow: /panel
 Disallow: /login
 Disallow: /mis-citas
 
-Sitemap: https://la-cosmiatra.pages.dev/sitemap.xml
+Sitemap: https://lacosmiatra.com/sitemap.xml

@@ -289,7 +289,7 @@ export default function Landing() {
             <ul className="l-footer__list">
               <li>Santo Domingo, República Dominicana</li>
               <li>Lun–Sáb · 9:00–18:00</li>
-              <li><a href="mailto:hola@lacosmiatra.com">hola@lacosmiatra.com</a></li>
+              <li><a href="mailto:leonelanunez@lacosmiatra.com">leonelanunez@lacosmiatra.com</a></li>
               <li><a href="/reservar">Reservar cita</a></li>
             </ul>
           </div>

@@ -25,7 +25,7 @@ const steps = [
   {
     num: '03',
     title: 'Confirma y listo',
-    text: 'Recibirás tu confirmación por correo y te esperamos en el estudio.'
+    text: 'Recibirás tu confirmación por correo y te esperamos en la cabina estética.'
   }
 ]
 
@@ -152,7 +152,7 @@ export default function Landing() {
           <div className="l-section__inner l-about__grid">
             <div className="l-about__media">
               <div className="l-arch l-about__arch">
-                <img src="/photo-2.jpg" alt="La Cosmiatra en su estudio" />
+                <img src="/photo-2.jpg" alt="La Cosmiatra en su cabina estética" />
               </div>
             </div>
 

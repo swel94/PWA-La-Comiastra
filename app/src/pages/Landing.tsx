@@ -281,6 +281,7 @@ export default function Landing() {
             <h3 className="l-footer__title">Contacto</h3>
             <ul className="l-footer__list">
               <li>Santiago de los Caballeros, República Dominicana</li>
+              <li><a href="tel:+18493844095">849-384-4095</a></li>
               <li>Lun–Sáb · 9:00–18:00</li>
               <li><a href="mailto:leonelanunez@lacosmiatra.com">leonelanunez@lacosmiatra.com</a></li>
               <li><a href="/reservar">Reservar cita</a></li>

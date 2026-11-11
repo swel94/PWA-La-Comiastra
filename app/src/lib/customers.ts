@@ -91,3 +91,9 @@ export async function deleteCustomer(id: string) {
   const { error } = await supabase.from('customers').delete().eq('id', id)
   if (error) throw error
 }
+
+export async function customerExistsByEmail(email: string): Promise<boolean> {
+  const { data, error } = await supabase.rpc('customer_exists_for_email', { p_email: email })
+  if (error) throw error
+  return Boolean(data)
+}

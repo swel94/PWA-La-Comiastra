@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from '../lib/auth'
 import { fetchActiveServices, type Service } from '../lib/services'
 import { fetchClinicalFields, responseOf, type ClinicalField } from '../lib/clinicalFields'
+import { customerExistsByEmail } from '../lib/customers'
 import MonthGrid from '../components/MonthGrid'
 import ClinicalForm from '../components/ClinicalForm'
 import { googleCalendarUrl } from '../lib/calendarLinks'
@@ -223,7 +224,25 @@ export default function Booking() {
     e.preventDefault()
     setBusy(true)
     setError(null)
-    const { error } = await sendOtp(email.trim())
+
+    if (returning) {
+      try {
+        const exists = await customerExistsByEmail(email.trim())
+        if (!exists) {
+          setBusy(false)
+          setError(
+            'No encontramos una cuenta con ese correo. Revisa que esté bien escrito o elige "Soy nueva" para registrarte.'
+          )
+          return
+        }
+      } catch {
+        setBusy(false)
+        setError('No pudimos verificar tu correo. Intenta de nuevo.')
+        return
+      }
+    }
+
+    const { error } = await sendOtp(email.trim(), !returning)
     setBusy(false)
     if (error) {
       setError('No pudimos enviar el código. Revisa tu correo e intenta de nuevo.')

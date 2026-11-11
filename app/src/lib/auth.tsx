@@ -10,7 +10,7 @@ interface AuthContextValue {
   role: Role
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error: string | null }>
-  sendOtp: (email: string) => Promise<{ error: string | null }>
+  sendOtp: (email: string, createUser?: boolean) => Promise<{ error: string | null }>
   verifyOtp: (email: string, token: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
 }
@@ -55,11 +55,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error ? error.message || 'Error al iniciar sesión' : null }
   }
 
-  /** Envía un código de 6 dígitos al correo (crea la cuenta si no existe). */
-  async function sendOtp(email: string) {
+  /** Envía un código de 6 dígitos al correo (crea la cuenta si createUser). */
+  async function sendOtp(email: string, createUser = true) {
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { shouldCreateUser: true }
+      options: { shouldCreateUser: createUser }
     })
     return { error: error ? error.message || 'No se pudo enviar el código' : null }
   }

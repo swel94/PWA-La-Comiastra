@@ -8,6 +8,13 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon-32.png', 'favicon-64.png', 'apple-touch-icon.png'],
+      workbox: {
+        // No precachear el HTML: cada visita debe pedir el index.html más reciente.
+        globPatterns: ['**/*.{js,css,png,jpg,jpeg,svg,ico,webmanifest}'],
+        globIgnores: ['**/index.html'],
+        navigateFallback: null as unknown as string,
+        cleanupOutdatedCaches: true
+      },
       manifest: {
         name: 'La Cosmiatra',
         short_name: 'La Cosmiatra',

@@ -54,14 +54,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reservar" element={<Booking />} />
-        <Route
-          path="/mis-citas"
-          element={
-            <RequireAuth>
-              <MyAppointments />
-            </RequireAuth>
-          }
-        />
+        <Route path="/mis-citas" element={<MyAppointments />} />
 
         <Route
           path="/panel"

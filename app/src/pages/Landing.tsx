@@ -78,15 +78,14 @@ export default function Landing() {
             <a className="l-nav__link" href="#servicios">Servicios</a>
             <a className="l-nav__link" href="#sobre-mi">Sobre mí</a>
             <a className="l-nav__link" href="#contacto">Contacto</a>
+            <Link className="l-nav__link" to="/mis-citas">Mis citas</Link>
           </nav>
 
           <div className="l-nav__actions">
             {session && (
               <>
-                {role === 'admin' ? (
+                {role === 'admin' && (
                   <Link className="l-nav__link" to="/panel">Panel</Link>
-                ) : (
-                  <Link className="l-nav__link" to="/mis-citas">Mis citas</Link>
                 )}
                 <button className="l-nav__auth" onClick={() => signOut()}>
                   Salir
@@ -274,6 +273,7 @@ export default function Landing() {
               <li><a href="#servicios">Servicios</a></li>
               <li><a href="#sobre-mi">Sobre mí</a></li>
               <li><a href="#contacto">Contacto</a></li>
+              <li><Link to="/mis-citas">Mis citas</Link></li>
             </ul>
           </div>
 

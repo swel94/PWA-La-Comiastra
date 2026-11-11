@@ -37,7 +37,7 @@ function titleOf(a: MyAppointment) {
 }
 
 export default function MyAppointments() {
-  const { session, signOut, sendOtp, verifyOtp } = useAuth()
+  const { session, role, signOut, sendOtp, verifyOtp } = useAuth()
   const [items, setItems] = useState<MyAppointment[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -61,8 +61,8 @@ export default function MyAppointments() {
   }
 
   useEffect(() => {
-    if (session) load()
-  }, [session])
+    if (session && role === 'customer') load()
+  }, [session, role])
 
   async function handleSendCode(e: FormEvent) {
     e.preventDefault()
@@ -234,6 +234,17 @@ export default function MyAppointments() {
                 </div>
               </form>
             )}
+          </>
+        ) : role === 'admin' ? (
+          <>
+            <p className="booking__sub">
+              Estás como administradora. Esta sección es para clientas.
+            </p>
+            <div className="b-actions">
+              <Link to="/panel" className="l-btn l-btn--primary">
+                Ir al panel
+              </Link>
+            </div>
           </>
         ) : (
           <>

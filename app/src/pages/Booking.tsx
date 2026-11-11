@@ -71,7 +71,7 @@ function formatDayLong(iso: string) {
 }
 
 export default function Booking() {
-  const { session, signIn, signUp } = useAuth()
+  const { session, sendOtp, verifyOtp } = useAuth()
 
   const [step, setStep] = useState(1)
   const [services, setServices] = useState<Service[]>([])
@@ -84,8 +84,9 @@ export default function Booking() {
   const [slot, setSlot] = useState<Slot | null>(null)
 
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [mode, setMode] = useState<'signup' | 'signin'>('signup')
+  const [returning, setReturning] = useState(false)
+  const [otpSent, setOtpSent] = useState(false)
+  const [code, setCode] = useState('')
 
   const [intake, setIntake] = useState<Intake>(EMPTY_INTAKE)
   const [clinicalFields, setClinicalFields] = useState<ClinicalField[]>([])
@@ -218,19 +219,28 @@ export default function Booking() {
     }
   }
 
-  async function handleAuth(e: FormEvent) {
+  async function handleSendCode(e: FormEvent) {
     e.preventDefault()
     setBusy(true)
     setError(null)
-    const action = mode === 'signup' ? signUp : signIn
-    const { error } = await action(email, password)
+    const { error } = await sendOtp(email.trim())
+    setBusy(false)
+    if (error) {
+      setError('No pudimos enviar el código. Revisa tu correo e intenta de nuevo.')
+      return
+    }
+    setCode('')
+    setOtpSent(true)
+  }
+
+  async function handleVerifyCode(e: FormEvent) {
+    e.preventDefault()
+    setBusy(true)
+    setError(null)
+    const { error } = await verifyOtp(email.trim(), code.trim())
     if (error) {
       setBusy(false)
-      if (/already|registrad/i.test(error)) {
-        setError('Ese correo ya está registrado. Usa “Ya tengo cuenta”.')
-      } else {
-        setError('No pudimos continuar. Verifica tus datos e intenta de nuevo.')
-      }
+      setError('El código no es válido o venció. Intenta de nuevo.')
       return
     }
     await afterAuth()
@@ -423,47 +433,95 @@ export default function Booking() {
         {step === 3 && (
           <>
             <h1 className="booking__title">Identifícate</h1>
-            <p className="booking__sub">Necesitamos tu correo para guardar tu cita.</p>
+            <p className="booking__sub">
+              Te enviaremos un código de 6 dígitos a tu correo. Sin contraseñas.
+            </p>
 
             <div className="b-toggle">
-              <button className={mode === 'signup' ? 'on' : ''} onClick={() => setMode('signup')}>
+              <button
+                type="button"
+                className={!returning ? 'on' : ''}
+                onClick={() => {
+                  setReturning(false)
+                  setOtpSent(false)
+                  setCode('')
+                  setError(null)
+                }}
+              >
                 Soy nueva
               </button>
-              <button className={mode === 'signin' ? 'on' : ''} onClick={() => setMode('signin')}>
-                Ya tengo cuenta
+              <button
+                type="button"
+                className={returning ? 'on' : ''}
+                onClick={() => {
+                  setReturning(true)
+                  setOtpSent(false)
+                  setCode('')
+                  setError(null)
+                }}
+              >
+                Ya reservé antes
               </button>
             </div>
 
-            <form onSubmit={handleAuth} autoComplete="off">
-              <label className="label">Correo electrónico</label>
-              <input
-                className="input"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-              />
-              <label className="label">Contraseña</label>
-              <input
-                className="input"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-                autoComplete="current-password"
-              />
-              {error && <p className="error">{error}</p>}
-              <div className="b-actions">
-                <button type="button" className="l-btn l-btn--ghost" onClick={() => setStep(2)}>
-                  Atrás
-                </button>
-                <button type="submit" className="l-btn l-btn--primary" disabled={busy}>
-                  {busy ? 'Ingresando…' : 'Continuar'}
-                </button>
-              </div>
-            </form>
+            {!otpSent ? (
+              <form onSubmit={handleSendCode} autoComplete="off">
+                <label className="label">Correo electrónico</label>
+                <input
+                  className="input"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                />
+                {error && <p className="error">{error}</p>}
+                <div className="b-actions">
+                  <button type="button" className="l-btn l-btn--ghost" onClick={() => setStep(2)}>
+                    Atrás
+                  </button>
+                  <button type="submit" className="l-btn l-btn--primary" disabled={busy}>
+                    {busy ? 'Enviando…' : 'Enviar código'}
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyCode} autoComplete="off">
+                <p className="booking__sub">
+                  Enviamos un código a <b>{email}</b>.
+                </p>
+                <label className="label">Código de 6 dígitos</label>
+                <input
+                  className="input"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
+                  required
+                />
+                {error && <p className="error">{error}</p>}
+                <div className="b-actions">
+                  <button
+                    type="button"
+                    className="l-btn l-btn--ghost"
+                    onClick={() => {
+                      setOtpSent(false)
+                      setCode('')
+                      setError(null)
+                    }}
+                  >
+                    Cambiar correo
+                  </button>
+                  <button
+                    type="submit"
+                    className="l-btn l-btn--primary"
+                    disabled={busy || code.length < 6}
+                  >
+                    {busy ? 'Verificando…' : 'Verificar'}
+                  </button>
+                </div>
+              </form>
+            )}
           </>
         )}
 

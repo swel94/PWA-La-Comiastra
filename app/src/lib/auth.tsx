@@ -10,7 +10,8 @@ interface AuthContextValue {
   role: Role
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error: string | null }>
-  signUp: (email: string, password: string) => Promise<{ error: string | null }>
+  sendOtp: (email: string) => Promise<{ error: string | null }>
+  verifyOtp: (email: string, token: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
 }
 
@@ -54,9 +55,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error ? error.message || 'Error al iniciar sesión' : null }
   }
 
-  async function signUp(email: string, password: string) {
-    const { error } = await supabase.auth.signUp({ email, password })
-    return { error: error ? error.message || 'Error al crear la cuenta' : null }
+  /** Envía un código de 6 dígitos al correo (crea la cuenta si no existe). */
+  async function sendOtp(email: string) {
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { shouldCreateUser: true }
+    })
+    return { error: error ? error.message || 'No se pudo enviar el código' : null }
+  }
+
+  /** Verifica el código y deja la sesión iniciada. */
+  async function verifyOtp(email: string, token: string) {
+    const { error } = await supabase.auth.verifyOtp({ email, token, type: 'email' })
+    return { error: error ? error.message || 'Código inválido o vencido' : null }
   }
 
   async function signOut() {
@@ -65,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ session, role, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ session, role, loading, signIn, sendOtp, verifyOtp, signOut }}>
       {children}
     </AuthContext.Provider>
   )
